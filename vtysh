@@ -1,0 +1,75 @@
+#### a1-1
+
+route-map RM_SET_SRC permit 10
+set src 11.0.0.2
+ip protocol bgp route-map RM_SET_SRC
+router bgp 65001
+neighbor 11.0.0.1 remote-as 65003
+neighbor 11.0.0.1 interface enp0s8
+network 1.1.1.1/32
+network 11.0.0.0/24
+
+#### a1-2
+
+route-map RM_SET_SRC permit 10
+set src 12.0.0.2
+ip protocol bgp route-map RM_SET_SRC
+router bgp 65002
+neighbor 12.0.0.1 remote-as 65003
+neighbor 12.0.0.1 interface enp0s8
+network 2.2.2.2/32
+network 12.0.0.0/24
+
+#### a1-3
+
+route-map RM_SET_SRC permit 10
+set src 11.0.0.1
+ip protocol bgp route-map RM_SET_SRC
+router bgp 65003
+
+neighbor 11.0.0.2 remote-as 65001
+neighbor 12.0.0.2 remote-as 65002
+neighbor 14.0.0.2 remote-as 65004
+neighbor 15.0.0.2 remote-as 65005
+
+neighbor 11.0.0.2 interface enp0s8
+neighbor 12.0.0.2 interface enp0s9
+neighbor 14.0.0.2 interface enp0s10
+neighbor 15.0.0.2 interface enp0s16
+
+network 3.3.3.3/32
+
+network 11.0.0.0/24
+network 12.0.0.0/24
+network 14.0.0.0/24
+network 15.0.0.0/24
+
+#### a1-4
+
+route-map RM_SET_SRC permit 10
+set src 14.0.0.2
+ip protocol bgp route-map RM_SET_SRC
+
+router bgp 65004
+
+neighbor 14.0.0.1 remote-as 65003
+
+neighbor 14.0.0.1 interface enp0s8
+
+network 4.4.4.4/32
+network 14.0.0.0/24
+
+#### a1-5
+
+route-map RM_SET_SRC permit 10
+set src 15.0.0.2
+ip protocol bgp route-map RM_SET_SRC
+
+router bgp 65005
+
+neighbor 15.0.0.1 remote-as 65003
+
+neighbor 15.0.0.1 interface enp0s8
+
+network 5.5.5.5/32
+network 15.0.0.0/24
